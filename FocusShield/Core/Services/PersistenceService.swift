@@ -1,17 +1,28 @@
 import Foundation
 import Combine
 
+// MARK: - App Configuration Constants
+
+enum AppConstants {
+    /// App Group identifier for sharing data with extensions
+    /// This is used by the main app and all extensions to share data via UserDefaults
+    static let appGroupId = "group.com.focusshield.shared"
+
+    /// Maximum number of integrity events to keep
+    static let maxIntegrityEvents = 100
+
+    /// Maximum number of daily records to keep
+    static let maxDailyRecords = 90
+}
+
 // MARK: - Persistence Service
 
 @MainActor
 class PersistenceService: ObservableObject {
     static let shared = PersistenceService()
 
-    // App Group identifier for sharing data with extensions
-    private let appGroupId = "group.com.focusshield.shared"
-
     private var userDefaults: UserDefaults {
-        UserDefaults(suiteName: appGroupId) ?? .standard
+        UserDefaults(suiteName: AppConstants.appGroupId) ?? .standard
     }
 
     // MARK: - Published Properties
@@ -205,9 +216,9 @@ class PersistenceService: ObservableObject {
         var events = integrityEvents
         events.append(event)
 
-        // Keep only last 100 events
-        if events.count > 100 {
-            events = Array(events.suffix(100))
+        // Keep only last N events to prevent unbounded growth
+        if events.count > AppConstants.maxIntegrityEvents {
+            events = Array(events.suffix(AppConstants.maxIntegrityEvents))
         }
 
         saveIntegrityEvents(events)
@@ -323,7 +334,8 @@ class PersistenceService: ObservableObject {
 // MARK: - UserDefaults Extension
 
 extension UserDefaults {
+    /// Shared UserDefaults for the app group (main app + extensions)
     static var appGroup: UserDefaults {
-        UserDefaults(suiteName: "group.com.focusshield.shared") ?? .standard
+        UserDefaults(suiteName: AppConstants.appGroupId) ?? .standard
     }
 }

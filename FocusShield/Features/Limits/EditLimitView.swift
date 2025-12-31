@@ -134,27 +134,46 @@ struct EditLimitView: View {
             weekendMinutes = weekendMins
         }
 
-        // Load saved selection if available
+        // Load saved app tokens
         if let appData = limit.appTokensData,
            let apps = try? PropertyListDecoder().decode(Set<ApplicationToken>.self, from: appData) {
             selectedApps.applicationTokens = apps
         }
+
+        // Load saved category tokens
+        if let categoryData = limit.categoryTokensData,
+           let categories = try? PropertyListDecoder().decode(Set<ActivityCategoryToken>.self, from: categoryData) {
+            selectedApps.categoryTokens = categories
+        }
+
+        // Load saved web domain tokens
+        if let webDomainData = limit.webDomainTokensData,
+           let domains = try? PropertyListDecoder().decode(Set<WebDomainToken>.self, from: webDomainData) {
+            selectedApps.webDomainTokens = domains
+        }
     }
 
     private func saveLimit() {
+        // Validate input
+        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedName.isEmpty, hasSelection else { return }
+
         // Encode the selection
         let appTokensData = try? PropertyListEncoder().encode(selectedApps.applicationTokens)
         let categoryTokensData = try? PropertyListEncoder().encode(selectedApps.categoryTokens)
+        let webDomainTokensData = try? PropertyListEncoder().encode(selectedApps.webDomainTokens)
 
         var newLimit = limit ?? AppLimit()
-        newLimit.name = name
-        newLimit.dailyMinutes = dailyMinutes
-        newLimit.weekendMinutes = hasWeekendOverride ? weekendMinutes : nil
+        newLimit.name = trimmedName
+        newLimit.dailyMinutes = max(5, min(480, dailyMinutes))  // Clamp to valid range
+        newLimit.weekendMinutes = hasWeekendOverride ? max(5, min(480, weekendMinutes)) : nil
         newLimit.isActive = isActive
         newLimit.appTokensData = appTokensData
         newLimit.categoryTokensData = categoryTokensData
+        newLimit.webDomainTokensData = webDomainTokensData
         newLimit.lastModified = Date()
 
+        HapticPattern.success()
         onSave(newLimit)
         dismiss()
     }

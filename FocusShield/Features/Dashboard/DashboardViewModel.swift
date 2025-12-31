@@ -6,6 +6,7 @@ class DashboardViewModel: ObservableObject {
     @Published var activeLimits: [AppLimit] = []
     @Published var partner: AccountabilityPartner?
     @Published var currentStreak: Int = 0
+    @Published var longestStreak: Int = 0
     @Published var daysWithinLimitsThisWeek: Int = 0
     @Published var currentInsight: Insight?
     @Published var isLoading: Bool = false
@@ -50,6 +51,11 @@ class DashboardViewModel: ObservableObject {
 
         persistence.$userProgress
             .receive(on: DispatchQueue.main)
+            .map { $0.longestStreak }
+            .assign(to: &$longestStreak)
+
+        persistence.$userProgress
+            .receive(on: DispatchQueue.main)
             .map { progress in
                 progress.weeklyHistory.filter { $0.withinAllLimits }.count
             }
@@ -67,7 +73,7 @@ class DashboardViewModel: ObservableObject {
         isLoading = false
     }
 
-    func refresh() {
+    func refresh() async {
         loadData()
     }
 

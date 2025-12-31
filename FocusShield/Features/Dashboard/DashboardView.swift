@@ -13,16 +13,21 @@ struct DashboardView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(viewModel.greeting)
                                 .font(.headlineLarge)
+                                .accessibilityAddTraits(.isHeader)
                             Text(viewModel.dateString)
                                 .font(.bodySmall)
                                 .foregroundColor(.neutral)
                         }
+                        .accessibilityElement(children: .combine)
 
                         Spacer()
 
                         // Streak badge
                         if viewModel.currentStreak > 0 {
-                            StreakBadge(days: viewModel.currentStreak)
+                            StreakBadge(
+                                days: viewModel.currentStreak,
+                                longestStreak: viewModel.longestStreak
+                            )
                         }
                     }
                     .padding(.horizontal, Spacing.md)
@@ -67,9 +72,9 @@ struct DashboardView: View {
                     .ignoresSafeArea()
             )
             .navigationTitle("")
-            .navigationBarHidden(true)
+            .hideNavigationBar()
             .refreshable {
-                viewModel.refresh()
+                await viewModel.refresh()
             }
         }
         .onAppear {

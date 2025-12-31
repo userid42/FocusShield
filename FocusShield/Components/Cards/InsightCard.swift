@@ -21,6 +21,16 @@ struct InsightCard: View {
         insight.type.icon
     }
 
+    private var insightTypeLabel: String {
+        switch insight.type {
+        case .pattern: return "Pattern insight"
+        case .improvement: return "Improvement"
+        case .suggestion: return "Suggestion"
+        case .celebration: return "Celebration"
+        case .warning: return "Warning"
+        }
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: Spacing.sm) {
             // Icon
@@ -33,6 +43,7 @@ struct InsightCard: View {
                     .font(.system(size: 16))
                     .foregroundColor(iconColor)
             }
+            .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: Spacing.xs) {
                 Text(insight.message)
@@ -49,6 +60,7 @@ struct InsightCard: View {
                             .font(.labelMedium)
                             .foregroundColor(.focusPrimary)
                     }
+                    .accessibilityHint("Double tap to take action")
                 }
             }
 
@@ -64,12 +76,15 @@ struct InsightCard: View {
                         .foregroundColor(.neutral)
                         .padding(Spacing.xs)
                 }
+                .accessibilityLabel("Dismiss insight")
             }
         }
         .padding(Spacing.md)
         .background(Color.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.large))
         .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("\(insightTypeLabel): \(insight.message)")
     }
 }
 

@@ -59,7 +59,7 @@ struct SettingsView: View {
                             icon: "person.2.fill",
                             iconColor: .success,
                             title: "Accountability Partner",
-                            value: persistence.user?.accountabilityPartner?.displayName
+                            value: persistence.partner?.name
                         )
                     }
 
@@ -167,6 +167,13 @@ struct SettingsRow: View {
     let value: String?
     var showChevron: Bool = true
 
+    private var accessibilityLabel: String {
+        if let value = value {
+            return "\(title), \(value)"
+        }
+        return title
+    }
+
     var body: some View {
         HStack(spacing: Spacing.md) {
             Image(systemName: icon)
@@ -175,6 +182,7 @@ struct SettingsRow: View {
                 .frame(width: 28, height: 28)
                 .background(iconColor.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 6))
+                .accessibilityHidden(true)
 
             Text(title)
                 .font(.bodyMedium)
@@ -191,9 +199,12 @@ struct SettingsRow: View {
                 Image(systemName: "chevron.right")
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(.neutral.opacity(0.5))
+                    .accessibilityHidden(true)
             }
         }
         .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 

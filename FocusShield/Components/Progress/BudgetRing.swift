@@ -15,6 +15,23 @@ struct BudgetRing: View {
         return .focusPrimary
     }
 
+    private var statusText: String {
+        if progress >= 1.0 { return "exceeded" }
+        if progress >= 0.8 { return "almost at limit" }
+        return ""
+    }
+
+    private var accessibilityLabel: String {
+        let remaining = max(0, totalMinutes - usedMinutes)
+        var label = "\(appName): \(usedMinutes) of \(totalMinutes) minutes used"
+        if progress >= 1.0 {
+            label += ", limit exceeded"
+        } else {
+            label += ", \(remaining) minutes remaining"
+        }
+        return label
+    }
+
     var body: some View {
         VStack(spacing: Spacing.xs) {
             ZStack {
@@ -49,6 +66,8 @@ struct BudgetRing: View {
                 .foregroundColor(.primary)
                 .lineLimit(1)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 
@@ -70,6 +89,20 @@ struct LargeBudgetRing: View {
         if progress >= 1.0 { return "Exceeded" }
         if progress >= 0.8 { return "Almost there" }
         return "On track"
+    }
+
+    private var accessibilityLabel: String {
+        let remaining = max(0, totalMinutes - usedMinutes)
+        let percent = Int(min(progress, 1.0) * 100)
+        var label = "\(title): \(usedMinutes) of \(totalMinutes) minutes used, \(percent) percent"
+        if progress >= 1.0 {
+            label += ". Limit exceeded"
+        } else if progress >= 0.8 {
+            label += ". Almost at limit, \(remaining) minutes remaining"
+        } else {
+            label += ". On track, \(remaining) minutes remaining"
+        }
+        return label
     }
 
     var body: some View {
@@ -109,6 +142,8 @@ struct LargeBudgetRing: View {
             Text(title)
                 .font(.headlineMedium)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 

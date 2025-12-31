@@ -4,10 +4,13 @@ import SwiftUI
 
 struct StreakBadge: View {
     let days: Int
+    var longestStreak: Int? = nil  // Optional: if provided, enables record detection
     var size: StreakBadgeSize = .medium
 
     private var status: StreakStatus {
-        StreakStatus(currentStreak: days, longestStreak: days)
+        // Use longest streak if provided, otherwise use a simple threshold-based approach
+        let longest = longestStreak ?? max(days, 7)  // Default: treat 7+ as potentially strong
+        return StreakStatus(currentStreak: days, longestStreak: longest)
     }
 
     private var badgeColor: Color {
@@ -16,6 +19,16 @@ struct StreakBadge: View {
         case .building: return .warning
         case .strong: return .focusPrimary
         case .record: return .success
+        }
+    }
+
+    private var accessibilityLabel: String {
+        if days == 0 {
+            return "No current streak"
+        } else if days == 1 {
+            return "1 day streak"
+        } else {
+            return "\(days) day streak"
         }
     }
 
@@ -34,6 +47,8 @@ struct StreakBadge: View {
         .padding(.vertical, size.verticalPadding)
         .background(badgeColor.opacity(0.1))
         .clipShape(Capsule())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 
@@ -95,12 +110,23 @@ struct LargeStreakDisplay: View {
         StreakStatus(currentStreak: currentStreak, longestStreak: longestStreak)
     }
 
+    private var accessibilityLabel: String {
+        var label = currentStreak == 1 ? "1 day streak" : "\(currentStreak) day streak"
+        if longestStreak > currentStreak {
+            label += ". Longest streak is \(longestStreak) days"
+        } else if currentStreak > 0 && currentStreak >= longestStreak {
+            label += ". This is your longest streak"
+        }
+        return label
+    }
+
     var body: some View {
         VStack(spacing: Spacing.md) {
             // Flame icon
             Image(systemName: status.icon)
                 .font(.system(size: 48))
                 .foregroundColor(streakColor)
+                .accessibilityHidden(true)
 
             // Current streak
             Text("\(currentStreak)")
@@ -129,6 +155,8 @@ struct LargeStreakDisplay: View {
             }
         }
         .padding(Spacing.lg)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 
     private var streakColor: Color {
