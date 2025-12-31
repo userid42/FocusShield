@@ -58,7 +58,39 @@ extension View {
 // MARK: - Animation Extensions
 
 extension View {
-    func focusSpringAnimation() -> some View {
-        self.animation(.spring(response: 0.4, dampingFraction: 0.7), value: UUID())
+    /// Apply focus spring animation with a specific value to animate on
+    func focusSpringAnimation<V: Equatable>(value: V) -> some View {
+        self.animation(.spring(response: 0.4, dampingFraction: 0.7), value: value)
+    }
+
+    /// Apply focus spring animation (use when you don't have a specific value)
+    func focusSpring() -> Animation {
+        .spring(response: 0.4, dampingFraction: 0.7)
+    }
+}
+
+// MARK: - Navigation Extensions
+
+extension View {
+    /// Hide the navigation bar in a compatible way for iOS 16+
+    @ViewBuilder
+    func hideNavigationBar() -> some View {
+        if #available(iOS 16.0, *) {
+            self.toolbar(.hidden, for: .navigationBar)
+        } else {
+            self.navigationBarHidden(true)
+        }
+    }
+}
+
+// MARK: - Accessibility Extensions
+
+extension View {
+    /// Add semantic accessibility information for screen readers
+    func accessibilityCard(label: String, hint: String? = nil) -> some View {
+        self
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(label)
+            .accessibilityHint(hint ?? "")
     }
 }

@@ -7,9 +7,18 @@ struct PrimaryButton: View {
     let action: () -> Void
     var isLoading: Bool = false
     var isDisabled: Bool = false
+    var accessibilityHint: String? = nil
+
+    private var accessibilityLabel: String {
+        if isLoading {
+            return "\(title), loading"
+        }
+        return title
+    }
 
     var body: some View {
         Button(action: {
+            guard !isLoading && !isDisabled else { return }
             HapticPattern.impact()
             action()
         }) {
@@ -18,12 +27,14 @@ struct PrimaryButton: View {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         .scaleEffect(0.8)
+                        .accessibilityHidden(true)
                 }
                 Text(title)
                     .font(.labelLarge)
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
+            .frame(minHeight: 44)  // Ensure minimum touch target size for accessibility
             .padding(.vertical, Spacing.md)
             .background(
                 LinearGradient(
@@ -37,6 +48,9 @@ struct PrimaryButton: View {
         }
         .disabled(isLoading || isDisabled)
         .opacity(isDisabled ? 0.6 : 1.0)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint(accessibilityHint ?? "")
+        .accessibilityAddTraits(isDisabled ? .isButton : [.isButton])
     }
 }
 
