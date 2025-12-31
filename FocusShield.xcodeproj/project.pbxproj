@@ -1,0 +1,851 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000001 /* FocusShieldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002; };
+		A1000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004; };
+		A1000005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000006; };
+		A1000007 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000008; };
+		A1000009 /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000A; };
+		A100000B /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000C; };
+		A100000D /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000E; };
+		A100000F /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000010; };
+		A1000011 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000012; };
+		A1000013 /* AppLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000014; };
+		A1000015 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000016; };
+		A1000017 /* AccountabilityPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000018; };
+		A1000019 /* UsageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001A; };
+		A100001B /* IntegrityEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001C; };
+		A100001D /* CommitmentMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100001E; };
+		A100001F /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000020; };
+		A1000021 /* TimeWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000022; };
+		A1000023 /* DailyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000024; };
+		A1000025 /* GracePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000026; };
+		A1000027 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000028; };
+		A1000029 /* ScreenTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100002A; };
+		A100002B /* AccountabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100002C; };
+		A100002D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100002E; };
+		A100002F /* IntegrityMonitorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000030; };
+		A1000031 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000032; };
+		A1000033 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000034; };
+		A1000035 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000036; };
+		A1000037 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000038; };
+		A1000039 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100003A; };
+		A100003B /* FocusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100003C; };
+		A100003D /* AppCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100003E; };
+		A100003F /* InsightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000040; };
+		A1000041 /* BudgetRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000042; };
+		A1000043 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000044; };
+		A1000045 /* StreakBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000046; };
+		A1000047 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000048; };
+		A1000049 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100004A; };
+		A100004B /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100004C; };
+		A100004D /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100004E; };
+		A100004F /* GoalSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000050; };
+		A1000051 /* AppSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000052; };
+		A1000053 /* CommitmentLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000054; };
+		A1000055 /* AccountabilitySetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000056; };
+		A1000057 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000058; };
+		A1000059 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100005A; };
+		A100005B /* OnboardingCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100005C; };
+		A100005D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100005E; };
+		A100005F /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000060; };
+		A1000061 /* BudgetSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000062; };
+		A1000063 /* QuickActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000064; };
+		A1000065 /* AccountabilityStatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000066; };
+		A1000067 /* WeeklySummaryTeaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000068; };
+		A1000069 /* CustomShieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100006A; };
+		A100006B /* ShieldOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100006C; };
+		A100006D /* GraceFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100006E; };
+		A100006F /* UrgeSurfingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000070; };
+		A1000071 /* SuccessMomentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000072; };
+		A1000073 /* RequestExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000074; };
+		A1000075 /* EmergencyAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000076; };
+		A1000077 /* BreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000078; };
+		A1000079 /* IntentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100007A; };
+		A100007B /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100007C; };
+		A100007D /* LimitsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100007E; };
+		A100007F /* EditLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000080; };
+		A1000081 /* AppGroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000082; };
+		A1000083 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000084; };
+		A1000085 /* AccountabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000086; };
+		A1000087 /* PartnerInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000088; };
+		A1000089 /* PartnerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100008A; };
+		A100008B /* IntegrityLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100008C; };
+		A100008D /* WeeklyReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100008E; };
+		A100008F /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000090; };
+		A1000091 /* TrendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000092; };
+		A1000093 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000094; };
+		A1000095 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000096; };
+		A1000097 /* CommitmentModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000098; };
+		A1000099 /* NotificationPrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100009A; };
+		A100009B /* PrivacySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100009C; };
+		A100009D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100009E; };
+		A100009F /* HapticPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000A0; };
+		A10000A1 /* AnimationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000A2; };
+		A10000A3 /* ToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000A4; };
+		A10000A5 /* QuickActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000A6; };
+		A10000A7 /* AlternativeAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000A8; };
+		A10000A9 /* GoalOptionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000AA; };
+		A10000AB /* TemplateChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000AC; };
+		A10000AD /* CommitmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000AE; };
+		A10000AF /* SelectedAppsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000B0; };
+		A10000B1 /* ShieldOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000B2; };
+		A10000B3 /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000B4; };
+		A10000B5 /* AlternativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000B6; };
+		A10000B7 /* ImplementationIntention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000B8; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1000000 /* FocusShield.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusShield.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000002 /* FocusShieldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusShieldApp.swift; sourceTree = "<group>"; };
+		A1000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1000006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000008 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		A100000A /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
+		A100000C /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		A100000E /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		A1000010 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		A1000012 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A1000014 /* AppLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLimit.swift; sourceTree = "<group>"; };
+		A1000016 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		A1000018 /* AccountabilityPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountabilityPartner.swift; sourceTree = "<group>"; };
+		A100001A /* UsageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageSession.swift; sourceTree = "<group>"; };
+		A100001C /* IntegrityEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrityEvent.swift; sourceTree = "<group>"; };
+		A100001E /* CommitmentMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentMode.swift; sourceTree = "<group>"; };
+		A1000020 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		A1000022 /* TimeWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeWindow.swift; sourceTree = "<group>"; };
+		A1000024 /* DailyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyRecord.swift; sourceTree = "<group>"; };
+		A1000026 /* GracePool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GracePool.swift; sourceTree = "<group>"; };
+		A1000028 /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
+		A100002A /* ScreenTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeService.swift; sourceTree = "<group>"; };
+		A100002C /* AccountabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountabilityService.swift; sourceTree = "<group>"; };
+		A100002E /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		A1000030 /* IntegrityMonitorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrityMonitorService.swift; sourceTree = "<group>"; };
+		A1000032 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		A1000034 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		A1000036 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		A1000038 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		A100003A /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
+		A100003C /* FocusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusCard.swift; sourceTree = "<group>"; };
+		A100003E /* AppCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCard.swift; sourceTree = "<group>"; };
+		A1000040 /* InsightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightCard.swift; sourceTree = "<group>"; };
+		A1000042 /* BudgetRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetRing.swift; sourceTree = "<group>"; };
+		A1000044 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		A1000046 /* StreakBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakBadge.swift; sourceTree = "<group>"; };
+		A1000048 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		A100004A /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		A100004C /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		A100004E /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		A1000050 /* GoalSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSelectionView.swift; sourceTree = "<group>"; };
+		A1000052 /* AppSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSelectionView.swift; sourceTree = "<group>"; };
+		A1000054 /* CommitmentLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentLevelView.swift; sourceTree = "<group>"; };
+		A1000056 /* AccountabilitySetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountabilitySetupView.swift; sourceTree = "<group>"; };
+		A1000058 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
+		A100005A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		A100005C /* OnboardingCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompleteView.swift; sourceTree = "<group>"; };
+		A100005E /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		A1000060 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		A1000062 /* BudgetSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetSummaryView.swift; sourceTree = "<group>"; };
+		A1000064 /* QuickActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionsView.swift; sourceTree = "<group>"; };
+		A1000066 /* AccountabilityStatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountabilityStatusCard.swift; sourceTree = "<group>"; };
+		A1000068 /* WeeklySummaryTeaser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummaryTeaser.swift; sourceTree = "<group>"; };
+		A100006A /* CustomShieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShieldView.swift; sourceTree = "<group>"; };
+		A100006C /* ShieldOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldOptionButton.swift; sourceTree = "<group>"; };
+		A100006E /* GraceFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceFlowView.swift; sourceTree = "<group>"; };
+		A1000070 /* UrgeSurfingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrgeSurfingView.swift; sourceTree = "<group>"; };
+		A1000072 /* SuccessMomentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessMomentView.swift; sourceTree = "<group>"; };
+		A1000074 /* RequestExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestExtensionView.swift; sourceTree = "<group>"; };
+		A1000076 /* EmergencyAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyAccessView.swift; sourceTree = "<group>"; };
+		A1000078 /* BreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingView.swift; sourceTree = "<group>"; };
+		A100007A /* IntentionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentionView.swift; sourceTree = "<group>"; };
+		A100007C /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+		A100007E /* LimitsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitsListView.swift; sourceTree = "<group>"; };
+		A1000080 /* EditLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLimitView.swift; sourceTree = "<group>"; };
+		A1000082 /* AppGroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupsView.swift; sourceTree = "<group>"; };
+		A1000084 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		A1000086 /* AccountabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountabilityView.swift; sourceTree = "<group>"; };
+		A1000088 /* PartnerInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerInviteView.swift; sourceTree = "<group>"; };
+		A100008A /* PartnerSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSettingsView.swift; sourceTree = "<group>"; };
+		A100008C /* IntegrityLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrityLogView.swift; sourceTree = "<group>"; };
+		A100008E /* WeeklyReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyReviewView.swift; sourceTree = "<group>"; };
+		A1000090 /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
+		A1000092 /* TrendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsView.swift; sourceTree = "<group>"; };
+		A1000094 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		A1000096 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A1000098 /* CommitmentModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentModeView.swift; sourceTree = "<group>"; };
+		A100009A /* NotificationPrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPrefsView.swift; sourceTree = "<group>"; };
+		A100009C /* PrivacySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsView.swift; sourceTree = "<group>"; };
+		A100009E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		A10000A0 /* HapticPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticPattern.swift; sourceTree = "<group>"; };
+		A10000A2 /* AnimationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationConstants.swift; sourceTree = "<group>"; };
+		A10000A4 /* ToggleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleRow.swift; sourceTree = "<group>"; };
+		A10000A6 /* QuickActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionButton.swift; sourceTree = "<group>"; };
+		A10000A8 /* AlternativeAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeAppButton.swift; sourceTree = "<group>"; };
+		A10000AA /* GoalOptionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalOptionCard.swift; sourceTree = "<group>"; };
+		A10000AC /* TemplateChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateChip.swift; sourceTree = "<group>"; };
+		A10000AE /* CommitmentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentCard.swift; sourceTree = "<group>"; };
+		A10000B0 /* SelectedAppsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAppsGrid.swift; sourceTree = "<group>"; };
+		A10000B2 /* ShieldOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldOption.swift; sourceTree = "<group>"; };
+		A10000B4 /* Insight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insight.swift; sourceTree = "<group>"; };
+		A10000B6 /* AlternativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeApp.swift; sourceTree = "<group>"; };
+		A10000B8 /* ImplementationIntention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImplementationIntention.swift; sourceTree = "<group>"; };
+		A10000B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000BA /* FocusShield.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FocusShield.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A0FFFFFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A0000000 = {
+			isa = PBXGroup;
+			children = (
+				A0000001 /* FocusShield */,
+				A0000002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A0000001 /* FocusShield */ = {
+			isa = PBXGroup;
+			children = (
+				A10000BA /* FocusShield.entitlements */,
+				A10000B9 /* Info.plist */,
+				A0000003 /* App */,
+				A0000004 /* Core */,
+				A0000005 /* Features */,
+				A0000006 /* Components */,
+				A0000007 /* Resources */,
+			);
+			path = FocusShield;
+			sourceTree = "<group>";
+		};
+		A0000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000 /* FocusShield.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A0000003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A1000002 /* FocusShieldApp.swift */,
+				A1000004 /* ContentView.swift */,
+				A100009E /* MainTabView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A0000004 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A0000008 /* Models */,
+				A0000009 /* Services */,
+				A000000A /* Extensions */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A0000005 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A000000B /* Onboarding */,
+				A000000C /* Dashboard */,
+				A000000D /* Shield */,
+				A000000E /* Limits */,
+				A000000F /* Accountability */,
+				A0000010 /* Progress */,
+				A0000011 /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A0000006 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A0000012 /* Buttons */,
+				A0000013 /* Cards */,
+				A0000014 /* Progress */,
+				A0000015 /* Shared */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A0000007 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A1000006 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A0000008 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A1000012 /* User.swift */,
+				A1000014 /* AppLimit.swift */,
+				A1000016 /* AppGroup.swift */,
+				A1000018 /* AccountabilityPartner.swift */,
+				A100001A /* UsageSession.swift */,
+				A100001C /* IntegrityEvent.swift */,
+				A100001E /* CommitmentMode.swift */,
+				A1000020 /* Achievement.swift */,
+				A1000022 /* TimeWindow.swift */,
+				A1000024 /* DailyRecord.swift */,
+				A1000026 /* GracePool.swift */,
+				A1000028 /* UserProgress.swift */,
+				A10000B2 /* ShieldOption.swift */,
+				A10000B4 /* Insight.swift */,
+				A10000B6 /* AlternativeApp.swift */,
+				A10000B8 /* ImplementationIntention.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A0000009 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A100002A /* ScreenTimeService.swift */,
+				A100002C /* AccountabilityService.swift */,
+				A100002E /* NotificationService.swift */,
+				A1000030 /* IntegrityMonitorService.swift */,
+				A1000032 /* PersistenceService.swift */,
+				A1000034 /* AnalyticsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A000000A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A1000008 /* Color+Extensions.swift */,
+				A100000A /* Font+Extensions.swift */,
+				A100000C /* Spacing.swift */,
+				A100000E /* View+Extensions.swift */,
+				A1000010 /* Date+Extensions.swift */,
+				A10000A0 /* HapticPattern.swift */,
+				A10000A2 /* AnimationConstants.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A000000B /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A100004E /* OnboardingCoordinator.swift */,
+				A100005A /* WelcomeView.swift */,
+				A1000050 /* GoalSelectionView.swift */,
+				A1000052 /* AppSelectionView.swift */,
+				A1000054 /* CommitmentLevelView.swift */,
+				A1000056 /* AccountabilitySetupView.swift */,
+				A1000058 /* PermissionsView.swift */,
+				A100005C /* OnboardingCompleteView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A000000C /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				A100005E /* DashboardView.swift */,
+				A1000060 /* DashboardViewModel.swift */,
+				A1000062 /* BudgetSummaryView.swift */,
+				A1000064 /* QuickActionsView.swift */,
+				A1000066 /* AccountabilityStatusCard.swift */,
+				A1000068 /* WeeklySummaryTeaser.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		A000000D /* Shield */ = {
+			isa = PBXGroup;
+			children = (
+				A100006A /* CustomShieldView.swift */,
+				A100006C /* ShieldOptionButton.swift */,
+				A100006E /* GraceFlowView.swift */,
+				A1000070 /* UrgeSurfingView.swift */,
+				A1000072 /* SuccessMomentView.swift */,
+				A1000074 /* RequestExtensionView.swift */,
+				A1000076 /* EmergencyAccessView.swift */,
+				A1000078 /* BreathingView.swift */,
+				A100007A /* IntentionView.swift */,
+				A100007C /* CountdownView.swift */,
+			);
+			path = Shield;
+			sourceTree = "<group>";
+		};
+		A000000E /* Limits */ = {
+			isa = PBXGroup;
+			children = (
+				A100007E /* LimitsListView.swift */,
+				A1000080 /* EditLimitView.swift */,
+				A1000082 /* AppGroupsView.swift */,
+				A1000084 /* ScheduleView.swift */,
+			);
+			path = Limits;
+			sourceTree = "<group>";
+		};
+		A000000F /* Accountability */ = {
+			isa = PBXGroup;
+			children = (
+				A1000086 /* AccountabilityView.swift */,
+				A1000088 /* PartnerInviteView.swift */,
+				A100008A /* PartnerSettingsView.swift */,
+				A100008C /* IntegrityLogView.swift */,
+			);
+			path = Accountability;
+			sourceTree = "<group>";
+		};
+		A0000010 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				A100008E /* WeeklyReviewView.swift */,
+				A1000090 /* StreakView.swift */,
+				A1000092 /* TrendsView.swift */,
+				A1000094 /* AchievementsView.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		A0000011 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A1000096 /* SettingsView.swift */,
+				A1000098 /* CommitmentModeView.swift */,
+				A100009A /* NotificationPrefsView.swift */,
+				A100009C /* PrivacySettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A0000012 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				A1000036 /* PrimaryButton.swift */,
+				A1000038 /* SecondaryButton.swift */,
+				A100003A /* IconButton.swift */,
+				A10000A6 /* QuickActionButton.swift */,
+				A10000A8 /* AlternativeAppButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		A0000013 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				A100003C /* FocusCard.swift */,
+				A100003E /* AppCard.swift */,
+				A1000040 /* InsightCard.swift */,
+				A10000AA /* GoalOptionCard.swift */,
+				A10000AE /* CommitmentCard.swift */,
+				A10000AC /* TemplateChip.swift */,
+				A10000A4 /* ToggleRow.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		A0000014 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				A1000042 /* BudgetRing.swift */,
+				A1000044 /* ProgressBar.swift */,
+				A1000046 /* StreakBadge.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		A0000015 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A1000048 /* LoadingView.swift */,
+				A100004A /* EmptyStateView.swift */,
+				A100004C /* ErrorView.swift */,
+				A10000B0 /* SelectedAppsGrid.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A0FFFFFE /* FocusShield */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0FFFFFD /* Build configuration list for PBXNativeTarget "FocusShield" */;
+			buildPhases = (
+				A0FFFFFC /* Sources */,
+				A0FFFFFF /* Frameworks */,
+				A0FFFFFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FocusShield;
+			productName = FocusShield;
+			productReference = A1000000 /* FocusShield.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A0FFFFF9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A0FFFFFE = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A0FFFFF8 /* Build configuration list for PBXProject "FocusShield" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A0000000;
+			productRefGroup = A0000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A0FFFFFE /* FocusShield */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A0FFFFFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000005 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A0FFFFFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001 /* FocusShieldApp.swift in Sources */,
+				A1000003 /* ContentView.swift in Sources */,
+				A1000007 /* Color+Extensions.swift in Sources */,
+				A1000009 /* Font+Extensions.swift in Sources */,
+				A100000B /* Spacing.swift in Sources */,
+				A100000D /* View+Extensions.swift in Sources */,
+				A100000F /* Date+Extensions.swift in Sources */,
+				A1000011 /* User.swift in Sources */,
+				A1000013 /* AppLimit.swift in Sources */,
+				A1000015 /* AppGroup.swift in Sources */,
+				A1000017 /* AccountabilityPartner.swift in Sources */,
+				A1000019 /* UsageSession.swift in Sources */,
+				A100001B /* IntegrityEvent.swift in Sources */,
+				A100001D /* CommitmentMode.swift in Sources */,
+				A100001F /* Achievement.swift in Sources */,
+				A1000021 /* TimeWindow.swift in Sources */,
+				A1000023 /* DailyRecord.swift in Sources */,
+				A1000025 /* GracePool.swift in Sources */,
+				A1000027 /* UserProgress.swift in Sources */,
+				A1000029 /* ScreenTimeService.swift in Sources */,
+				A100002B /* AccountabilityService.swift in Sources */,
+				A100002D /* NotificationService.swift in Sources */,
+				A100002F /* IntegrityMonitorService.swift in Sources */,
+				A1000031 /* PersistenceService.swift in Sources */,
+				A1000033 /* AnalyticsService.swift in Sources */,
+				A1000035 /* PrimaryButton.swift in Sources */,
+				A1000037 /* SecondaryButton.swift in Sources */,
+				A1000039 /* IconButton.swift in Sources */,
+				A100003B /* FocusCard.swift in Sources */,
+				A100003D /* AppCard.swift in Sources */,
+				A100003F /* InsightCard.swift in Sources */,
+				A1000041 /* BudgetRing.swift in Sources */,
+				A1000043 /* ProgressBar.swift in Sources */,
+				A1000045 /* StreakBadge.swift in Sources */,
+				A1000047 /* LoadingView.swift in Sources */,
+				A1000049 /* EmptyStateView.swift in Sources */,
+				A100004B /* ErrorView.swift in Sources */,
+				A100004D /* OnboardingCoordinator.swift in Sources */,
+				A100004F /* GoalSelectionView.swift in Sources */,
+				A1000051 /* AppSelectionView.swift in Sources */,
+				A1000053 /* CommitmentLevelView.swift in Sources */,
+				A1000055 /* AccountabilitySetupView.swift in Sources */,
+				A1000057 /* PermissionsView.swift in Sources */,
+				A1000059 /* WelcomeView.swift in Sources */,
+				A100005B /* OnboardingCompleteView.swift in Sources */,
+				A100005D /* DashboardView.swift in Sources */,
+				A100005F /* DashboardViewModel.swift in Sources */,
+				A1000061 /* BudgetSummaryView.swift in Sources */,
+				A1000063 /* QuickActionsView.swift in Sources */,
+				A1000065 /* AccountabilityStatusCard.swift in Sources */,
+				A1000067 /* WeeklySummaryTeaser.swift in Sources */,
+				A1000069 /* CustomShieldView.swift in Sources */,
+				A100006B /* ShieldOptionButton.swift in Sources */,
+				A100006D /* GraceFlowView.swift in Sources */,
+				A100006F /* UrgeSurfingView.swift in Sources */,
+				A1000071 /* SuccessMomentView.swift in Sources */,
+				A1000073 /* RequestExtensionView.swift in Sources */,
+				A1000075 /* EmergencyAccessView.swift in Sources */,
+				A1000077 /* BreathingView.swift in Sources */,
+				A1000079 /* IntentionView.swift in Sources */,
+				A100007B /* CountdownView.swift in Sources */,
+				A100007D /* LimitsListView.swift in Sources */,
+				A100007F /* EditLimitView.swift in Sources */,
+				A1000081 /* AppGroupsView.swift in Sources */,
+				A1000083 /* ScheduleView.swift in Sources */,
+				A1000085 /* AccountabilityView.swift in Sources */,
+				A1000087 /* PartnerInviteView.swift in Sources */,
+				A1000089 /* PartnerSettingsView.swift in Sources */,
+				A100008B /* IntegrityLogView.swift in Sources */,
+				A100008D /* WeeklyReviewView.swift in Sources */,
+				A100008F /* StreakView.swift in Sources */,
+				A1000091 /* TrendsView.swift in Sources */,
+				A1000093 /* AchievementsView.swift in Sources */,
+				A1000095 /* SettingsView.swift in Sources */,
+				A1000097 /* CommitmentModeView.swift in Sources */,
+				A1000099 /* NotificationPrefsView.swift in Sources */,
+				A100009B /* PrivacySettingsView.swift in Sources */,
+				A100009D /* MainTabView.swift in Sources */,
+				A100009F /* HapticPattern.swift in Sources */,
+				A10000A1 /* AnimationConstants.swift in Sources */,
+				A10000A3 /* ToggleRow.swift in Sources */,
+				A10000A5 /* QuickActionButton.swift in Sources */,
+				A10000A7 /* AlternativeAppButton.swift in Sources */,
+				A10000A9 /* GoalOptionCard.swift in Sources */,
+				A10000AB /* TemplateChip.swift in Sources */,
+				A10000AD /* CommitmentCard.swift in Sources */,
+				A10000AF /* SelectedAppsGrid.swift in Sources */,
+				A10000B1 /* ShieldOption.swift in Sources */,
+				A10000B3 /* Insight.swift in Sources */,
+				A10000B5 /* AlternativeApp.swift in Sources */,
+				A10000B7 /* ImplementationIntention.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A0FFFFF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A0FFFFF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A0FFFFFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FocusShield/FocusShield.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusShield/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusshield.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A0FFFFFB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FocusShield/FocusShield.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusShield/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusshield.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A0FFFFF8 /* Build configuration list for PBXProject "FocusShield" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0FFFFF6 /* Debug */,
+				A0FFFFF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0FFFFFD /* Build configuration list for PBXNativeTarget "FocusShield" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0FFFFFA /* Debug */,
+				A0FFFFFB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A0FFFFF9 /* Project object */;
+}
