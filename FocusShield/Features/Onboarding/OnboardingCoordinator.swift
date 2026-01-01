@@ -86,7 +86,10 @@ struct OnboardingCoordinator: View {
                 removal: .move(edge: .leading).combined(with: .opacity)
             ))
         }
-        .background(Color.backgroundStart.ignoresSafeArea())
+        .background(
+            LinearGradient.backgroundGradient
+                .ignoresSafeArea()
+        )
         .animation(.smooth, value: currentStep)
     }
 
@@ -109,17 +112,25 @@ struct OnboardingCoordinator: View {
         )
         persistence.saveUser(user)
 
-        // Save partner if provided
+        // Save partner if provided with validated contact
         if !partnerName.isEmpty && !partnerContact.isEmpty {
-            let contactMethod: ContactMethod = partnerContact.contains("@")
-                ? .email(address: partnerContact)
-                : .sms(phoneNumber: partnerContact)
+            let sanitizedContact = Validation.sanitize(partnerContact)
+            let validationResult = Validation.validateContact(sanitizedContact, type: .auto)
 
-            let partner = AccountabilityPartner(
-                name: partnerName,
-                contactMethod: contactMethod
-            )
-            persistence.savePartner(partner)
+            if validationResult.isValid {
+                let contactMethod: ContactMethod = sanitizedContact.contains("@")
+                    ? .email(address: Validation.sanitizeEmail(sanitizedContact))
+                    : .sms(phoneNumber: Validation.sanitizePhoneNumber(sanitizedContact))
+
+                let partner = AccountabilityPartner(
+                    name: Validation.sanitize(partnerName),
+                    contactMethod: contactMethod
+                )
+                persistence.savePartner(partner)
+
+                // Store contact securely in keychain
+                try? KeychainService.shared.saveContactMethod(contactMethod)
+            }
         }
 
         // Track analytics

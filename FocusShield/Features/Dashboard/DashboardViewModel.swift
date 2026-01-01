@@ -64,22 +64,45 @@ class DashboardViewModel: ObservableObject {
 
     func loadData() {
         isLoading = true
+        defer { isLoading = false }
+
         persistence.loadAll()
 
         // Generate insight
         let insights = analytics.generateWeeklyInsights()
         currentInsight = insights.first
-
-        isLoading = false
     }
 
     func refresh() async {
-        loadData()
+        isLoading = true
+
+        // Add a small delay to show refresh indicator
+        try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+
+        await MainActor.run {
+            persistence.loadAll()
+
+            // Generate insight
+            let insights = analytics.generateWeeklyInsights()
+            currentInsight = insights.first
+
+            isLoading = false
+        }
     }
 
-    func startFocusBlock() {
+    func startFocusBlock(duration: TimeInterval = 3600) {
         HapticPattern.impact()
-        // Start a 1-hour focus block
-        ScreenTimeService.shared.applyShields()
+
+        // Get selected apps from screen time service
+        let selection = ScreenTimeService.shared.selectedApps
+
+        // Start focus block with specified duration (default 1 hour)
+        ScreenTimeService.shared.startFocusBlock(duration: duration, apps: selection)
+    }
+
+    /// End any active focus block
+    func endFocusBlock() {
+        HapticPattern.selection()
+        ScreenTimeService.shared.removeAllShields()
     }
 }
