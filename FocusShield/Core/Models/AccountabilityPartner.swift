@@ -51,6 +51,18 @@ enum ContactMethod: Codable, Equatable {
         }
     }
 
+    /// Masked display value for privacy (e.g., "j***@example.com")
+    var maskedDisplayValue: String {
+        switch self {
+        case .sms(let phone):
+            return maskPhoneNumber(phone)
+        case .email(let address):
+            return maskEmail(address)
+        case .pushNotification:
+            return "Push Notification"
+        }
+    }
+
     var icon: String {
         switch self {
         case .sms:
@@ -60,6 +72,41 @@ enum ContactMethod: Codable, Equatable {
         case .pushNotification:
             return "bell.fill"
         }
+    }
+
+    var contactType: String {
+        switch self {
+        case .sms: return "SMS"
+        case .email: return "Email"
+        case .pushNotification: return "Push"
+        }
+    }
+
+    // MARK: - Private Helpers
+
+    private func maskEmail(_ email: String) -> String {
+        let parts = email.split(separator: "@")
+        guard parts.count == 2 else { return "***@***" }
+
+        let username = String(parts[0])
+        let domain = String(parts[1])
+
+        let maskedUsername: String
+        if username.count <= 2 {
+            maskedUsername = String(repeating: "*", count: username.count)
+        } else {
+            maskedUsername = String(username.prefix(1)) + String(repeating: "*", count: username.count - 2) + String(username.suffix(1))
+        }
+
+        return "\(maskedUsername)@\(domain)"
+    }
+
+    private func maskPhoneNumber(_ phone: String) -> String {
+        let digits = phone.filter { $0.isNumber }
+        guard digits.count >= 4 else { return "****" }
+
+        let lastFour = String(digits.suffix(4))
+        return "***-***-\(lastFour)"
     }
 }
 

@@ -36,14 +36,26 @@ struct GracePool: Codable {
         }
     }
 
+    /// Check if graces are remaining (accounts for day change)
+    /// Note: This is a computed property that checks without mutating
     var hasGracesRemaining: Bool {
-        var mutableSelf = self
-        mutableSelf.resetIfNeeded()
-        return mutableSelf.dailyGracesRemaining > 0
+        // Check if we need to reset (new day)
+        if !Calendar.current.isDateInToday(lastResetDate) {
+            return true // Will have full graces after reset
+        }
+        return dailyGracesRemaining > 0
+    }
+
+    /// Returns the actual remaining count accounting for potential reset
+    var effectiveGracesRemaining: Int {
+        if !Calendar.current.isDateInToday(lastResetDate) {
+            return 3 // Will reset to full
+        }
+        return dailyGracesRemaining
     }
 
     var displayRemaining: String {
-        let remaining = dailyGracesRemaining
+        let remaining = effectiveGracesRemaining
         if remaining == 0 {
             return "No graces left today"
         } else if remaining == 1 {

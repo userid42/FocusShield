@@ -69,25 +69,45 @@ struct LimitRow: View {
         return .focusPrimary
     }
 
+    private var statusDescription: String {
+        if limit.isExceeded {
+            return "exceeded"
+        } else if !limit.isActive {
+            return "paused"
+        } else if limit.progress >= 0.8 {
+            return "approaching limit"
+        } else {
+            return "active"
+        }
+    }
+
+    private var accessibilityLabel: String {
+        let usageText = "\(limit.usedMinutesToday) of \(limit.effectiveDailyLimit) minutes used"
+        return "\(limit.displayName), \(usageText), \(statusDescription)"
+    }
+
     var body: some View {
         HStack(spacing: Spacing.md) {
             // Progress ring
             CircularProgressView(progress: limit.progress, color: progressColor)
                 .frame(width: 44, height: 44)
+                .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(limit.displayName)
                     .font(.headlineMedium)
+                    .foregroundColor(.adaptiveText)
 
                 HStack(spacing: Spacing.xs) {
                     Text("\(limit.usedMinutesToday)m / \(limit.effectiveDailyLimit)m")
                         .font(.labelMedium)
-                        .foregroundColor(.neutral)
+                        .foregroundColor(.adaptiveSecondaryText)
 
                     if limit.isExceeded {
                         Text("Exceeded")
                             .font(.labelSmall)
                             .foregroundColor(.danger)
+                            .fontWeight(.medium)
                     }
                 }
             }
@@ -98,14 +118,20 @@ struct LimitRow: View {
             Circle()
                 .fill(limit.isActive ? Color.success : Color.neutral.opacity(0.3))
                 .frame(width: 10, height: 10)
+                .accessibilityHidden(true)
 
             Image(systemName: "chevron.right")
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(.neutral)
+                .accessibilityHidden(true)
         }
         .padding(Spacing.md)
-        .background(Color.cardBackground)
+        .background(Color.adaptiveCardBackground)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint("Double tap to edit limit")
+        .accessibilityAddTraits(.isButton)
     }
 }
 

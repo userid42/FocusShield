@@ -9,13 +9,16 @@ struct LoadingView: View {
         VStack(spacing: Spacing.md) {
             ProgressView()
                 .scaleEffect(1.2)
+                .tint(.focusPrimary)
 
             Text(message)
                 .font(.bodyMedium)
-                .foregroundColor(.neutral)
+                .foregroundColor(.adaptiveSecondaryText)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.backgroundStart.ignoresSafeArea())
+        .background(LinearGradient.backgroundGradient.ignoresSafeArea())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(message)
     }
 }
 

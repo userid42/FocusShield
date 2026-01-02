@@ -117,14 +117,17 @@ struct SettingsView: View {
                         )
                     }
 
-                    Link(destination: URL(string: "https://focusshield.app/support")!) {
-                        SettingsRow(
-                            icon: "questionmark.circle.fill",
-                            iconColor: .neutral,
-                            title: "Help & Support",
-                            value: nil,
-                            showChevron: false
-                        )
+                    if let supportURL = URL(string: "https://focusshield.app/support") {
+                        Link(destination: supportURL) {
+                            SettingsRow(
+                                icon: "questionmark.circle.fill",
+                                iconColor: .neutral,
+                                title: "Help & Support",
+                                value: nil,
+                                showChevron: false
+                            )
+                        }
+                        .accessibilityHint("Opens in Safari")
                     }
                 } header: {
                     Text("About")

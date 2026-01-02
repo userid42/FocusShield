@@ -53,9 +53,12 @@ struct WeeklyReviewView: View {
                 }
                 .padding(.vertical, Spacing.md)
             }
-            .background(Color.backgroundStart.ignoresSafeArea())
+            .background(
+                LinearGradient.backgroundGradient
+                    .ignoresSafeArea()
+            )
             .navigationTitle("Progress")
-            .onAppear {
+            .task {
                 viewModel.loadData()
             }
         }
