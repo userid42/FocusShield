@@ -19,6 +19,11 @@ class ScreenTimeService: ObservableObject {
 
     private init() {
         checkAuthorizationStatus()
+        loadSelection()
+
+        // Recover from any interrupted timers
+        recoverFromGracePeriod()
+        recoverFromFocusBlock()
     }
 
     // MARK: - Authorization
@@ -78,12 +83,42 @@ class ScreenTimeService: ObservableObject {
         store.shield.webDomains = nil
     }
 
+    /// Temporarily removes shields for a grace period
+    /// - Parameter minutes: Duration in minutes for the grace period
+    /// - Important: This uses `DispatchQueue.asyncAfter` which does NOT persist across app terminations.
+    ///   For production use, consider using `DeviceActivitySchedule` with a specific end time
+    ///   or storing the grace end time and checking on app launch.
     func temporarilyRemoveShield(for minutes: Int) {
         removeAllShields()
 
+        // Store grace end time for recovery if app is terminated
+        let graceEndTime = Date().addingTimeInterval(TimeInterval(minutes * 60))
+        UserDefaults.appGroup.set(graceEndTime, forKey: "graceEndTime")
+
         // Re-apply after the grace period
         DispatchQueue.main.asyncAfter(deadline: .now() + .minutes(minutes)) { [weak self] in
+            UserDefaults.appGroup.removeObject(forKey: "graceEndTime")
             self?.applyShields()
+        }
+    }
+
+    /// Checks for any pending grace periods that may have been interrupted by app termination
+    func recoverFromGracePeriod() {
+        guard let graceEndTime = UserDefaults.appGroup.object(forKey: "graceEndTime") as? Date else {
+            return
+        }
+
+        if Date() >= graceEndTime {
+            // Grace period has expired, re-apply shields
+            UserDefaults.appGroup.removeObject(forKey: "graceEndTime")
+            applyShields()
+        } else {
+            // Grace period still active, schedule re-application
+            let remainingTime = graceEndTime.timeIntervalSince(Date())
+            DispatchQueue.main.asyncAfter(deadline: .now() + remainingTime) { [weak self] in
+                UserDefaults.appGroup.removeObject(forKey: "graceEndTime")
+                self?.applyShields()
+            }
         }
     }
 
@@ -169,14 +204,45 @@ class ScreenTimeService: ObservableObject {
 
     // MARK: - Focus Blocks
 
+    /// Starts a focus block that shields selected apps for the specified duration
+    /// - Parameters:
+    ///   - duration: Duration in seconds for the focus block
+    ///   - apps: The apps to shield during the focus block
+    /// - Important: Uses `DispatchQueue.asyncAfter` for timing. Consider using DeviceActivitySchedule
+    ///   for more reliable scheduling that persists across app terminations.
     func startFocusBlock(duration: TimeInterval, apps: FamilyActivitySelection) {
         guard isAuthorized else { return }
 
         applyShields(for: apps)
 
+        // Store focus block end time for recovery if app is terminated
+        let focusEndTime = Date().addingTimeInterval(duration)
+        UserDefaults.appGroup.set(focusEndTime, forKey: "focusBlockEndTime")
+
         // Schedule removal after duration
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
+            UserDefaults.appGroup.removeObject(forKey: "focusBlockEndTime")
             self?.removeAllShields()
+        }
+    }
+
+    /// Checks for any pending focus blocks that may have been interrupted by app termination
+    func recoverFromFocusBlock() {
+        guard let focusEndTime = UserDefaults.appGroup.object(forKey: "focusBlockEndTime") as? Date else {
+            return
+        }
+
+        if Date() >= focusEndTime {
+            // Focus block has expired, remove shields
+            UserDefaults.appGroup.removeObject(forKey: "focusBlockEndTime")
+            removeAllShields()
+        } else {
+            // Focus block still active, schedule removal
+            let remainingTime = focusEndTime.timeIntervalSince(Date())
+            DispatchQueue.main.asyncAfter(deadline: .now() + remainingTime) { [weak self] in
+                UserDefaults.appGroup.removeObject(forKey: "focusBlockEndTime")
+                self?.removeAllShields()
+            }
         }
     }
 }

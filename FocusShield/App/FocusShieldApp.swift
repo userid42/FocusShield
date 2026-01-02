@@ -13,6 +13,8 @@ struct FocusShieldApp: App {
                 .environmentObject(persistence)
                 .environmentObject(screenTimeService)
                 .environmentObject(integrityMonitor)
+                .preferredColorScheme(persistence.appSettings.appearanceMode.colorScheme)
+                .tint(.focusPrimary)
         }
     }
 }
