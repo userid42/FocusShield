@@ -215,7 +215,11 @@ extension KeychainService {
                 return .pushNotification(deviceToken: token)
             }
         } catch {
-            print("Failed to retrieve contact method from keychain: \(error)")
+            LoggingService.shared.keychain(
+                "Failed to retrieve contact method",
+                operation: .load,
+                error: error
+            )
         }
         return nil
     }

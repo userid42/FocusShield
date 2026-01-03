@@ -319,17 +319,20 @@ class PersistenceService: ObservableObject {
         do {
             let data = try JSONEncoder().encode(value)
             userDefaults.set(data, forKey: key)
+            LoggingService.shared.persistence("Saved \(key)", operation: .save)
         } catch {
-            print("Failed to save \(key): \(error)")
+            LoggingService.shared.persistence("Failed to save \(key)", operation: .encode, error: error)
         }
     }
 
     private func load<T: Decodable>(_ type: T.Type, forKey key: String) -> T? {
         guard let data = userDefaults.data(forKey: key) else { return nil }
         do {
-            return try JSONDecoder().decode(type, from: data)
+            let result = try JSONDecoder().decode(type, from: data)
+            LoggingService.shared.persistence("Loaded \(key)", operation: .load)
+            return result
         } catch {
-            print("Failed to load \(key): \(error)")
+            LoggingService.shared.persistence("Failed to load \(key)", operation: .decode, error: error)
             return nil
         }
     }

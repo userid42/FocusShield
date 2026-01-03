@@ -26,17 +26,21 @@ struct CustomShieldView: View {
                 Image(systemName: "hand.raised.fill")
                     .font(.system(size: 48))
                     .foregroundColor(.focusPrimary)
+                    .accessibilityHidden(true)
 
                 // Message
                 VStack(spacing: Spacing.sm) {
                     Text("You've used your \(appName) time today.")
                         .font(.headlineLarge)
                         .multilineTextAlignment(.center)
+                        .accessibilityAddTraits(.isHeader)
 
                     Text("Choose your next move")
                         .font(.bodyMedium)
                         .foregroundColor(.neutral)
                 }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("You've used your \(appName) time today. Choose your next move")
 
                 Spacer()
 

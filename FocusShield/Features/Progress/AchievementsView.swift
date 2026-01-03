@@ -45,6 +45,11 @@ struct AchievementSummaryCard: View {
         return Double(unlocked) / Double(total)
     }
 
+    private var accessibilityLabel: String {
+        let percent = Int(progress * 100)
+        return "\(unlocked) of \(total) achievements unlocked, \(percent) percent complete"
+    }
+
     var body: some View {
         FocusCard {
             HStack {
@@ -69,9 +74,12 @@ struct AchievementSummaryCard: View {
                     Image(systemName: "trophy.fill")
                         .font(.system(size: 20))
                         .foregroundColor(.warning)
+                        .accessibilityHidden(true)
                 }
             }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 
@@ -112,6 +120,16 @@ struct AchievementCard: View {
         achievement.definition
     }
 
+    private var accessibilityLabel: String {
+        let title = definition?.title ?? "Achievement"
+        let description = definition?.description ?? ""
+        if achievement.isUnlocked {
+            return "\(title), \(description), unlocked"
+        } else {
+            return "\(title), \(description), \(achievement.displayProgress)"
+        }
+    }
+
     var body: some View {
         VStack(spacing: Spacing.sm) {
             ZStack {
@@ -123,6 +141,7 @@ struct AchievementCard: View {
                     .font(.system(size: 28))
                     .foregroundColor(achievement.isUnlocked ? .warning : .neutral.opacity(0.5))
             }
+            .accessibilityHidden(true)
 
             VStack(spacing: 4) {
                 Text(definition?.title ?? "")
@@ -147,6 +166,8 @@ struct AchievementCard: View {
         .background(Color.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
         .opacity(achievement.isUnlocked ? 1 : 0.7)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 

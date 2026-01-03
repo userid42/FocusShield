@@ -40,6 +40,17 @@ struct LabeledProgressBar: View {
         return color
     }
 
+    private var accessibilityLabel: String {
+        let percent = Int(progress * 100)
+        var status = ""
+        if progress >= 1.0 {
+            status = ", limit exceeded"
+        } else if progress >= 0.8 {
+            status = ", approaching limit"
+        }
+        return "\(title), \(percent) percent\(status)"
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.xs) {
             HStack {
@@ -58,6 +69,8 @@ struct LabeledProgressBar: View {
 
             ProgressBar(progress: progress, color: progressColor)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 
@@ -101,6 +114,18 @@ struct DayProgressDot: View {
     let day: Weekday
     let status: DayStatus
 
+    private var accessibilityLabel: String {
+        let statusText: String
+        switch status {
+        case .success: statusText = "success, within limits"
+        case .failed: statusText = "failed, exceeded limits"
+        case .inProgress: statusText = "in progress"
+        case .future: statusText = "future day"
+        case .missed: statusText = "no data"
+        }
+        return "\(day.rawValue), \(statusText)"
+    }
+
     var body: some View {
         VStack(spacing: Spacing.xxs) {
             Circle()
@@ -111,10 +136,12 @@ struct DayProgressDot: View {
                         Image(systemName: "checkmark")
                             .font(.system(size: 12, weight: .bold))
                             .foregroundColor(.white)
+                            .accessibilityHidden(true)
                     } else if status == .failed {
                         Image(systemName: "xmark")
                             .font(.system(size: 12, weight: .bold))
                             .foregroundColor(.white)
+                            .accessibilityHidden(true)
                     }
                 }
 
@@ -122,6 +149,8 @@ struct DayProgressDot: View {
                 .font(.labelSmall)
                 .foregroundColor(.neutral)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 

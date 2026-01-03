@@ -71,7 +71,7 @@ struct EmptyStateView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(title). \(message)")
-        .accessibilityHint(actionTitle != nil ? "Double tap to \(actionTitle!.lowercased())" : "")
+        .accessibilityHint(actionTitle.map { "Double tap to \($0.lowercased())" } ?? "")
         .onAppear {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
                 iconScale = 1.0

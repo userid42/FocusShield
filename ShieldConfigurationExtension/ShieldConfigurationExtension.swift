@@ -61,12 +61,13 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         // Get commitment mode to determine strictness
         let commitmentMode = userDefaults?.string(forKey: "commitment_mode") ?? "standard"
 
-        // Determine colors based on mode
+        // Determine colors based on mode (using teal theme to match main app)
         let backgroundColor = ShieldConfiguration.BackgroundStyle.color(
             UIColor(red: 0.047, green: 0.051, blue: 0.059, alpha: 1.0)
         )
 
-        let primaryColor = UIColor(red: 0.310, green: 0.275, blue: 0.898, alpha: 1.0)
+        // Focus Shield teal color (#0F5955)
+        let primaryColor = UIColor(red: 0.059, green: 0.349, blue: 0.333, alpha: 1.0)
 
         return ShieldConfiguration(
             backgroundBlurStyle: .systemMaterialDark,
@@ -98,7 +99,8 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         let renderer = UIGraphicsImageRenderer(size: size)
 
         return renderer.image { context in
-            let primaryColor = UIColor(red: 0.310, green: 0.275, blue: 0.898, alpha: 1.0)
+            // Focus Shield teal color (#0F5955)
+            let primaryColor = UIColor(red: 0.059, green: 0.349, blue: 0.333, alpha: 1.0)
 
             // Draw circle background
             let circlePath = UIBezierPath(ovalIn: CGRect(origin: .zero, size: size))
