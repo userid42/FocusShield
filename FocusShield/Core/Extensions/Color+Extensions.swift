@@ -3,15 +3,20 @@ import SwiftUI
 // MARK: - Color System
 
 extension Color {
-    // Primary Brand Colors
-    static let focusPrimary = Color(hex: "4F46E5")      // Indigo - trust, focus
-    static let focusSecondary = Color(hex: "7C3AED")   // Violet - calm energy
+    // Primary Brand Colors - Deep Teal palette
+    static let focusPrimary = Color(hex: "0F5955")      // Deep Teal - trust, calm, focus
+    static let focusSecondary = Color(hex: "14746F")    // Lighter Teal - accent, energy
+
+    // Extended Primary Palette
+    static let focusTertiary = Color(hex: "1A9E97")     // Bright Teal - highlights
+    static let focusLight = Color(hex: "A7D7D4")        // Light Teal - subtle backgrounds
+    static let focusDark = Color(hex: "0A3D3A")         // Dark Teal - text on light bg
 
     // Semantic Colors
-    static let success = Color(hex: "10B981")          // Emerald - wins, streaks
-    static let warning = Color(hex: "F59E0B")          // Amber - approaching limit
-    static let danger = Color(hex: "EF4444")           // Red - limit exceeded
-    static let neutral = Color(hex: "6B7280")          // Gray - secondary text
+    static let success = Color(hex: "059669")           // Emerald 600 - wins, streaks
+    static let warning = Color(hex: "D97706")           // Amber 600 - approaching limit
+    static let danger = Color(hex: "DC2626")            // Red 600 - limit exceeded
+    static let neutral = Color(hex: "6B7280")           // Gray 500 - secondary text
 
     // MARK: - Adaptive Colors (Light/Dark Mode)
 
@@ -118,10 +123,25 @@ extension Color {
 // MARK: - Gradient Presets
 
 extension LinearGradient {
+    /// Primary brand gradient - Deep teal to lighter teal
     static let primaryGradient = LinearGradient(
         colors: [Color.focusPrimary, Color.focusSecondary],
         startPoint: .leading,
         endPoint: .trailing
+    )
+
+    /// Vibrant accent gradient for highlights
+    static let accentGradient = LinearGradient(
+        colors: [Color.focusSecondary, Color.focusTertiary],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    /// Subtle gradient for cards and surfaces
+    static let subtleGradient = LinearGradient(
+        colors: [Color.focusPrimary.opacity(0.08), Color.focusSecondary.opacity(0.04)],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
     )
 
     /// Adaptive background gradient that works in both light and dark mode
@@ -141,6 +161,12 @@ extension LinearGradient {
 
     static let dangerGradient = LinearGradient(
         colors: [Color.danger, Color.danger.opacity(0.8)],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    static let warningGradient = LinearGradient(
+        colors: [Color.warning, Color.warning.opacity(0.8)],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )

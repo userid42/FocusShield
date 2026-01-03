@@ -4,6 +4,7 @@ struct WelcomeView: View {
     let onContinue: () -> Void
 
     @State private var showContent = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(spacing: Spacing.xl) {
@@ -14,13 +15,13 @@ struct WelcomeView: View {
                 Circle()
                     .fill(
                         LinearGradient(
-                            colors: [Color.focusPrimary.opacity(0.2), Color.focusSecondary.opacity(0.2)],
+                            colors: [Color.focusPrimary.opacity(0.15), Color.focusSecondary.opacity(0.1)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
                     .frame(width: 120, height: 120)
-                    .scaleEffect(showContent ? 1 : 0.5)
+                    .scaleEffect(showContent ? 1 : (reduceMotion ? 1 : 0.5))
                     .opacity(showContent ? 1 : 0)
 
                 Image(systemName: "shield.checkered")
@@ -32,26 +33,29 @@ struct WelcomeView: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                    .scaleEffect(showContent ? 1 : 0.5)
+                    .scaleEffect(showContent ? 1 : (reduceMotion ? 1 : 0.5))
                     .opacity(showContent ? 1 : 0)
             }
-            .animation(.spring(response: 0.6, dampingFraction: 0.7).delay(0.2), value: showContent)
+            .animation(reduceMotion ? .none : .spring(response: 0.6, dampingFraction: 0.7).delay(0.2), value: showContent)
+            .accessibilityHidden(true)
 
             // Title
             VStack(spacing: Spacing.sm) {
                 Text("FocusShield")
                     .font(.displayLarge)
+                    .foregroundColor(.adaptiveText)
                     .opacity(showContent ? 1 : 0)
-                    .offset(y: showContent ? 0 : 20)
-                    .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.4), value: showContent)
+                    .offset(y: showContent ? 0 : (reduceMotion ? 0 : 20))
+                    .animation(reduceMotion ? .none : .spring(response: 0.6, dampingFraction: 0.8).delay(0.4), value: showContent)
+                    .accessibilityAddTraits(.isHeader)
 
                 Text("Build better phone habits with\naccountability that works")
                     .font(.bodyLarge)
                     .foregroundColor(.neutral)
                     .multilineTextAlignment(.center)
                     .opacity(showContent ? 1 : 0)
-                    .offset(y: showContent ? 0 : 20)
-                    .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.5), value: showContent)
+                    .offset(y: showContent ? 0 : (reduceMotion ? 0 : 20))
+                    .animation(reduceMotion ? .none : .spring(response: 0.6, dampingFraction: 0.8).delay(0.5), value: showContent)
             }
 
             Spacer()
@@ -78,16 +82,21 @@ struct WelcomeView: View {
             }
             .padding(.horizontal, Spacing.md)
             .opacity(showContent ? 1 : 0)
-            .offset(y: showContent ? 0 : 30)
-            .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.6), value: showContent)
+            .offset(y: showContent ? 0 : (reduceMotion ? 0 : 30))
+            .animation(reduceMotion ? .none : .spring(response: 0.6, dampingFraction: 0.8).delay(0.6), value: showContent)
 
             Spacer()
 
             // Continue button
-            PrimaryButton(title: "Get Started", action: onContinue)
-                .padding(.horizontal, Spacing.md)
-                .opacity(showContent ? 1 : 0)
-                .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.8), value: showContent)
+            PrimaryButton(
+                title: "Get Started",
+                action: onContinue,
+                icon: "arrow.right",
+                accessibilityHint: "Begins the setup process"
+            )
+            .padding(.horizontal, Spacing.md)
+            .opacity(showContent ? 1 : 0)
+            .animation(reduceMotion ? .none : .spring(response: 0.6, dampingFraction: 0.8).delay(0.8), value: showContent)
 
             // Privacy note
             Text("2 minutes to set up. No account required.")
@@ -95,7 +104,7 @@ struct WelcomeView: View {
                 .foregroundColor(.neutral)
                 .padding(.bottom, Spacing.lg)
                 .opacity(showContent ? 1 : 0)
-                .animation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.9), value: showContent)
+                .animation(reduceMotion ? .none : .spring(response: 0.6, dampingFraction: 0.8).delay(0.9), value: showContent)
         }
         .onAppear {
             showContent = true

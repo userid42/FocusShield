@@ -5,6 +5,7 @@ struct SuccessMomentView: View {
 
     @State private var showCheckmark = false
     @State private var showContent = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let alternativeApps = Array(AlternativeApp.defaults.prefix(3))
 
@@ -15,62 +16,86 @@ struct SuccessMomentView: View {
             // Animated checkmark
             ZStack {
                 Circle()
-                    .fill(Color.success.opacity(0.1))
+                    .fill(
+                        LinearGradient(
+                            colors: [Color.focusPrimary.opacity(0.15), Color.focusSecondary.opacity(0.1)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .frame(width: 120, height: 120)
-                    .scaleEffect(showCheckmark ? 1.0 : 0.5)
+                    .scaleEffect(showCheckmark ? 1.0 : (reduceMotion ? 1.0 : 0.5))
                     .opacity(showCheckmark ? 1.0 : 0)
 
                 Image(systemName: "checkmark")
                     .font(.system(size: 48, weight: .semibold))
-                    .foregroundColor(.success)
-                    .scaleEffect(showCheckmark ? 1.0 : 0.3)
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [Color.focusPrimary, Color.focusSecondary],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .scaleEffect(showCheckmark ? 1.0 : (reduceMotion ? 1.0 : 0.3))
                     .opacity(showCheckmark ? 1.0 : 0)
             }
-            .animation(.spring(response: 0.5, dampingFraction: 0.6), value: showCheckmark)
+            .animation(reduceMotion ? .none : .spring(response: 0.5, dampingFraction: 0.6), value: showCheckmark)
+            .accessibilityLabel("Success")
 
             if showContent {
                 VStack(spacing: Spacing.sm) {
                     Text("Nice choice.")
                         .font(.displayMedium)
+                        .foregroundColor(.adaptiveText)
+                        .accessibilityAddTraits(.isHeader)
 
                     Text("You're building a new pattern.")
                         .font(.bodyMedium)
                         .foregroundColor(.neutral)
                 }
-                .transition(.fadeAndSlide)
+                .transition(reduceMotion ? .opacity : .fadeAndSlide)
 
                 // Alternative suggestions
                 AlternativeAppsRow(apps: alternativeApps)
                     .padding(.top, Spacing.lg)
                     .transition(.opacity)
+                    .accessibilityLabel("Alternative activities")
             }
 
             Spacer()
 
             if showContent {
                 Button("Go to Home") {
+                    HapticPattern.selection()
                     onDismiss()
                 }
                 .font(.labelLarge)
-                .foregroundColor(.neutral)
+                .foregroundColor(.focusPrimary)
+                .padding(.vertical, Spacing.sm)
                 .transition(.opacity)
+                .accessibilityHint("Closes this screen")
 
                 Spacer()
                     .frame(height: Spacing.lg)
             }
         }
         .padding(Spacing.lg)
-        .background(Color.backgroundStart.ignoresSafeArea())
+        .background(LinearGradient.backgroundGradient.ignoresSafeArea())
         .onAppear {
             HapticPattern.success()
 
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
+            if reduceMotion {
                 showCheckmark = true
-            }
+                showContent = true
+            } else {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
+                    showCheckmark = true
+                }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                withAnimation(.easeOut(duration: 0.3)) {
-                    showContent = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        showContent = true
+                    }
                 }
             }
         }
