@@ -21,13 +21,22 @@ struct UserProgress: Codable {
     }
 
     mutating func recordDay(_ record: DailyRecord) {
-        // Update weekly history (keep last 7 days)
-        weeklyHistory.append(record)
-        if weeklyHistory.count > 7 {
-            weeklyHistory.removeFirst()
-        }
+        let recordDay = Calendar.current.startOfDay(for: record.date)
 
-        totalDaysTracked += 1
+        // Check if we already have a record for this day to prevent duplicates
+        if let existingIndex = weeklyHistory.firstIndex(where: {
+            Calendar.current.isDate($0.date, inSameDayAs: recordDay)
+        }) {
+            // Update existing record instead of adding duplicate
+            weeklyHistory[existingIndex] = record
+        } else {
+            // Add new record and maintain 7-day history
+            weeklyHistory.append(record)
+            if weeklyHistory.count > 7 {
+                weeklyHistory.removeFirst()
+            }
+            totalDaysTracked += 1
+        }
 
         if record.withinAllLimits {
             totalDaysWithinLimits += 1
@@ -36,12 +45,8 @@ struct UserProgress: Codable {
                 longestStreak = currentStreak
             }
         } else {
-            // Check if we should do a soft reset
-            if currentStreak > 0 {
-                // First failure: warning only (keep streak for now)
-                // This could be enhanced with more sophisticated logic
-                currentStreak = 0
-            }
+            // Reset streak on limit violation
+            currentStreak = 0
         }
 
         lastUpdated = Date()
