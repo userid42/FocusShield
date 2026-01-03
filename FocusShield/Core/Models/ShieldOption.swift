@@ -19,6 +19,15 @@ enum ShieldOption: String, CaseIterable, Identifiable {
         }
     }
 
+    var accessibilityHint: String {
+        switch self {
+        case .done: return "Exit the app and return to home screen"
+        case .grace: return "Take a 10 second breathing pause, then get 2 minutes of access"
+        case .request: return "Request 10 more minutes. Your accountability partner will be notified"
+        case .emergency: return "Get emergency access. Your partner will be immediately notified"
+        }
+    }
+
     var iconName: String {
         switch self {
         case .done: return "checkmark.circle.fill"

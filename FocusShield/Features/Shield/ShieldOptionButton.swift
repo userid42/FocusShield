@@ -26,6 +26,7 @@ struct ShieldOptionButton: View {
             VStack(spacing: Spacing.xs) {
                 Image(systemName: option.iconName)
                     .font(.system(size: 24))
+                    .accessibilityHidden(true)
 
                 Text(option.rawValue)
                     .font(.labelLarge)
@@ -35,6 +36,7 @@ struct ShieldOptionButton: View {
                     .foregroundColor(option == .done ? .white.opacity(0.8) : .neutral)
             }
             .frame(maxWidth: .infinity)
+            .frame(minHeight: 44)  // Ensure minimum touch target
             .padding(.vertical, Spacing.lg)
             .background(backgroundColor)
             .foregroundColor(foregroundColor)
@@ -42,6 +44,10 @@ struct ShieldOptionButton: View {
             .shadow(color: .black.opacity(0.08), radius: 8, y: 2)
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(option.rawValue)
+        .accessibilityHint(option.accessibilityHint)
+        .accessibilityAddTraits(.isButton)
     }
 }
 

@@ -75,15 +75,14 @@ class WeeklyReviewViewModel: ObservableObject {
     @Published var longestStreak: Int = 0
     @Published var unlockedAchievements: Int = 0
     @Published var totalAchievements: Int = 0
+    @Published var summary: WeeklySummary = WeeklySummary()
 
     private let persistence = PersistenceService.shared
     private let analytics = AnalyticsService.shared
 
-    var summary: WeeklySummary {
-        analytics.generateWeeklySummary()
-    }
-
     func loadData() {
+        // Generate summary once instead of on every view update
+        summary = analytics.generateWeeklySummary()
         records = persistence.userProgress.weeklyHistory
         insights = analytics.generateWeeklyInsights()
         currentStreak = persistence.userProgress.currentStreak

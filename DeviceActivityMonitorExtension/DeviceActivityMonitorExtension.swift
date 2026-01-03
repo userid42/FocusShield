@@ -154,15 +154,27 @@ enum MonitorEventType: String {
 }
 
 // MARK: - Application Token Codable Extension
+//
+// Note: ApplicationToken is not directly Codable. The proper way to persist
+// ApplicationTokens is using FamilyActivitySelection and storing the selection
+// in app group UserDefaults. This extension is left as a placeholder but should
+// not be used in production code as ApplicationToken doesn't provide a way to
+// reconstruct from encoded data.
 
 extension ApplicationToken: Codable {
+    enum CodableError: Error {
+        case applicationTokenNotDecodable
+    }
+
     public init(from decoder: Decoder) throws {
-        // ApplicationToken doesn't have public init, this is a placeholder
-        fatalError("ApplicationToken cannot be decoded directly")
+        // ApplicationToken doesn't have a public initializer and can't be decoded
+        // This will throw a proper error instead of crashing
+        throw CodableError.applicationTokenNotDecodable
     }
 
     public func encode(to encoder: Encoder) throws {
-        // Encode the token data
+        // Encode the token's hash value as a best effort
+        // Note: This can be encoded but cannot be decoded back to ApplicationToken
         var container = encoder.singleValueContainer()
         try container.encode(self.hashValue)
     }
