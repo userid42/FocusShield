@@ -36,6 +36,7 @@ class PersistenceService: ObservableObject {
     @Published var integrityEvents: [IntegrityEvent] = []
     @Published var timeWindows: [TimeWindow] = []
     @Published var intentions: [ImplementationIntention] = []
+    @Published var appSettings: AppSettings = AppSettings()
 
     // MARK: - Keys
 
@@ -55,6 +56,7 @@ class PersistenceService: ObservableObject {
         static let accountabilityWasEnabled = "accountabilityWasEnabled"
         static let showAppNameOnShield = "showAppNameOnShield"
         static let selectedAppsData = "selectedAppsData"
+        static let appSettings = "appSettings"
     }
 
     // MARK: - Initialization
@@ -75,6 +77,7 @@ class PersistenceService: ObservableObject {
         integrityEvents = load([IntegrityEvent].self, forKey: Keys.integrityEvents) ?? []
         timeWindows = load([TimeWindow].self, forKey: Keys.timeWindows) ?? []
         intentions = load([ImplementationIntention].self, forKey: Keys.intentions) ?? []
+        appSettings = load(AppSettings.self, forKey: Keys.appSettings) ?? AppSettings()
 
         // Reset grace pool if needed
         gracePool.resetIfNeeded()
@@ -263,6 +266,53 @@ class PersistenceService: ObservableObject {
         saveIntentions(updatedIntentions)
     }
 
+    // MARK: - App Settings
+
+    func saveAppSettings(_ settings: AppSettings) {
+        self.appSettings = settings
+        save(settings, forKey: Keys.appSettings)
+    }
+
+    func updateAppearanceMode(_ mode: AppearanceMode) {
+        var settings = appSettings
+        settings.appearanceMode = mode
+        saveAppSettings(settings)
+    }
+
+    func updateProFeaturesEnabled(_ enabled: Bool) {
+        var settings = appSettings
+        settings.proFeaturesEnabled = enabled
+        saveAppSettings(settings)
+    }
+
+    func updateHapticsEnabled(_ enabled: Bool) {
+        var settings = appSettings
+        settings.hapticsEnabled = enabled
+        saveAppSettings(settings)
+    }
+
+    // MARK: - Pro Feature Checks
+
+    /// Check if a specific Pro feature is available
+    func isProFeatureAvailable(_ feature: ProFeature) -> Bool {
+        appSettings.proFeaturesEnabled
+    }
+
+    /// Check if user can add more limits (respects free tier)
+    var canAddMoreLimits: Bool {
+        appSettings.proFeaturesEnabled || limits.count < FreeTierLimits.maxLimits
+    }
+
+    /// Check if user can add more time windows (respects free tier)
+    var canAddMoreTimeWindows: Bool {
+        appSettings.proFeaturesEnabled || timeWindows.count < FreeTierLimits.maxTimeWindows
+    }
+
+    /// Check if user can add more intentions (respects free tier)
+    var canAddMoreIntentions: Bool {
+        appSettings.proFeaturesEnabled || intentions.count < FreeTierLimits.maxIntentions
+    }
+
     // MARK: - Helper Methods
 
     private func save<T: Encodable>(_ value: T, forKey key: String) {
@@ -320,7 +370,7 @@ class PersistenceService: ObservableObject {
             Keys.timeWindows, Keys.intentions, Keys.dailyRecords,
             Keys.onboardingCompleted, Keys.accountabilityEnabled,
             Keys.accountabilityWasEnabled, Keys.showAppNameOnShield,
-            Keys.selectedAppsData
+            Keys.selectedAppsData, Keys.appSettings
         ]
 
         for key in keys {
