@@ -29,6 +29,8 @@ struct EditLimitView: View {
                 // Name
                 Section {
                     TextField("Limit name", text: $name)
+                        .accessibilityLabel("Limit name")
+                        .accessibilityHint("Enter a name for this app limit")
                 } header: {
                     Text("Name")
                 }
@@ -50,6 +52,8 @@ struct EditLimitView: View {
                         }
                     }
                     .foregroundColor(.primary)
+                    .accessibilityLabel(hasSelection ? "Edit selected apps, \(selectedApps.applicationTokens.count + selectedApps.categoryTokens.count) apps selected" : "Select apps to limit")
+                    .accessibilityHint("Opens app picker")
                 } header: {
                     Text("Apps to Limit")
                 }
@@ -72,6 +76,8 @@ struct EditLimitView: View {
                                     .foregroundColor(dailyMinutes == minutes ? .white : .primary)
                                     .clipShape(Capsule())
                             }
+                            .accessibilityLabel("\(minutes) minutes preset")
+                            .accessibilityAddTraits(dailyMinutes == minutes ? .isSelected : [])
                         }
                     }
                 } header: {
@@ -110,6 +116,7 @@ struct EditLimitView: View {
                         saveLimit()
                     }
                     .disabled(name.isEmpty || !hasSelection)
+                    .accessibilityHint(name.isEmpty ? "Enter a name to save" : !hasSelection ? "Select apps to save" : "Save limit")
                 }
             }
             .familyActivityPicker(
@@ -135,33 +142,57 @@ struct EditLimitView: View {
         }
 
         // Load saved app tokens
-        if let appData = limit.appTokensData,
-           let apps = try? PropertyListDecoder().decode(Set<ApplicationToken>.self, from: appData) {
-            selectedApps.applicationTokens = apps
+        if let appData = limit.appTokensData {
+            do {
+                let apps = try PropertyListDecoder().decode(Set<ApplicationToken>.self, from: appData)
+                selectedApps.applicationTokens = apps
+            } catch {
+                LoggingService.shared.error("Failed to decode app tokens for limit '\(limit.name)'", error: error)
+            }
         }
 
         // Load saved category tokens
-        if let categoryData = limit.categoryTokensData,
-           let categories = try? PropertyListDecoder().decode(Set<ActivityCategoryToken>.self, from: categoryData) {
-            selectedApps.categoryTokens = categories
+        if let categoryData = limit.categoryTokensData {
+            do {
+                let categories = try PropertyListDecoder().decode(Set<ActivityCategoryToken>.self, from: categoryData)
+                selectedApps.categoryTokens = categories
+            } catch {
+                LoggingService.shared.error("Failed to decode category tokens for limit '\(limit.name)'", error: error)
+            }
         }
 
         // Load saved web domain tokens
-        if let webDomainData = limit.webDomainTokensData,
-           let domains = try? PropertyListDecoder().decode(Set<WebDomainToken>.self, from: webDomainData) {
-            selectedApps.webDomainTokens = domains
+        if let webDomainData = limit.webDomainTokensData {
+            do {
+                let domains = try PropertyListDecoder().decode(Set<WebDomainToken>.self, from: webDomainData)
+                selectedApps.webDomainTokens = domains
+            } catch {
+                LoggingService.shared.error("Failed to decode web domain tokens for limit '\(limit.name)'", error: error)
+            }
         }
     }
 
     private func saveLimit() {
         // Validate input
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmedName.isEmpty, hasSelection else { return }
+        guard !trimmedName.isEmpty, hasSelection else {
+            LoggingService.shared.warning("Attempted to save limit with invalid data")
+            return
+        }
 
         // Encode the selection
-        let appTokensData = try? PropertyListEncoder().encode(selectedApps.applicationTokens)
-        let categoryTokensData = try? PropertyListEncoder().encode(selectedApps.categoryTokens)
-        let webDomainTokensData = try? PropertyListEncoder().encode(selectedApps.webDomainTokens)
+        var appTokensData: Data?
+        var categoryTokensData: Data?
+        var webDomainTokensData: Data?
+
+        do {
+            appTokensData = try PropertyListEncoder().encode(selectedApps.applicationTokens)
+            categoryTokensData = try PropertyListEncoder().encode(selectedApps.categoryTokens)
+            webDomainTokensData = try PropertyListEncoder().encode(selectedApps.webDomainTokens)
+        } catch {
+            LoggingService.shared.error("Failed to encode app selection for limit '\(trimmedName)'", error: error)
+            // Continue with nil data - at least save the limit metadata
+        }
 
         var newLimit = limit ?? AppLimit()
         newLimit.name = trimmedName
@@ -173,6 +204,7 @@ struct EditLimitView: View {
         newLimit.webDomainTokensData = webDomainTokensData
         newLimit.lastModified = Date()
 
+        LoggingService.shared.info("Saved limit '\(trimmedName)' with \(dailyMinutes) minutes daily")
         HapticPattern.success()
         onSave(newLimit)
         dismiss()

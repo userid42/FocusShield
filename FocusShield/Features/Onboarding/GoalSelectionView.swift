@@ -26,6 +26,7 @@ struct GoalSelectionView: View {
                 Text("What do you want to change?")
                     .font(.displayMedium)
                     .multilineTextAlignment(.center)
+                    .accessibilityAddTraits(.isHeader)
 
                 Text("This helps us personalize your experience")
                     .font(.bodyMedium)
@@ -37,8 +38,8 @@ struct GoalSelectionView: View {
             ScrollView {
                 VStack(spacing: Spacing.md) {
                     ForEach(UserGoal.allCases) { goal in
-                        GoalOptionCard(
-                            goal: goal,
+                        SelectableOptionCard(
+                            option: goal,
                             isSelected: selectedGoal == goal,
                             onTap: {
                                 withAnimation(.focusSpring) {
@@ -54,10 +55,14 @@ struct GoalSelectionView: View {
             Spacer()
 
             // Continue button
-            PrimaryButton(title: "Continue", action: onContinue)
-                .disabled(selectedGoal == nil)
-                .padding(.horizontal, Spacing.md)
-                .padding(.bottom, Spacing.lg)
+            PrimaryButton(
+                title: "Continue",
+                action: onContinue,
+                isDisabled: selectedGoal == nil,
+                accessibilityHint: selectedGoal == nil ? "Select a goal to continue" : "Continue to next step"
+            )
+            .padding(.horizontal, Spacing.md)
+            .padding(.bottom, Spacing.lg)
         }
     }
 }

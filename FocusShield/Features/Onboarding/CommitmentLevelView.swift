@@ -25,6 +25,7 @@ struct CommitmentLevelView: View {
             VStack(spacing: Spacing.sm) {
                 Text("How strict?")
                     .font(.displayMedium)
+                    .accessibilityAddTraits(.isHeader)
 
                 Text("You can change this anytime")
                     .font(.bodyMedium)
@@ -35,30 +36,19 @@ struct CommitmentLevelView: View {
             ScrollView {
                 VStack(spacing: Spacing.md) {
                     ForEach(CommitmentMode.allCases) { mode in
-                        CommitmentCard(
-                            mode: mode,
+                        SelectableOptionCard(
+                            option: mode,
                             isSelected: selectedMode == mode,
                             onTap: {
                                 withAnimation(.focusSpring) {
                                     selectedMode = mode
                                 }
-                            }
+                            },
+                            showRecommendedBadge: mode == .standard
                         )
                     }
                 }
                 .padding(.horizontal, Spacing.md)
-            }
-
-            // Recommendation badge
-            if selectedMode == .standard {
-                HStack {
-                    Image(systemName: "star.fill")
-                        .foregroundColor(.warning)
-                    Text("Recommended for most users")
-                        .font(.labelMedium)
-                        .foregroundColor(.neutral)
-                }
-                .padding(.top, Spacing.xs)
             }
 
             // Feature list
@@ -66,13 +56,19 @@ struct CommitmentLevelView: View {
                 CommitmentFeatureList(mode: selectedMode)
             }
             .padding(.horizontal, Spacing.md)
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("Features for \(selectedMode.rawValue) mode")
 
             Spacer()
 
             // Continue button
-            PrimaryButton(title: "Continue", action: onContinue)
-                .padding(.horizontal, Spacing.md)
-                .padding(.bottom, Spacing.lg)
+            PrimaryButton(
+                title: "Continue",
+                action: onContinue,
+                accessibilityHint: "Continue with \(selectedMode.rawValue) commitment level"
+            )
+            .padding(.horizontal, Spacing.md)
+            .padding(.bottom, Spacing.lg)
         }
     }
 }
